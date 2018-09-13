@@ -65,6 +65,10 @@ Temporary Items
 .idea/**/gradle.xml
 .idea/**/libraries
 
+# workspaces
+.idea/inspectionProfiles/*
+.idea/vcs.xml
+
 # CMake
 cmake-build-debug/
 

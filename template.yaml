@@ -8,7 +8,7 @@ Description: >
 # More info about Globals: https://github.com/awslabs/serverless-application-model/blob/master/docs/globals.rst
 Globals:
     Function:
-        Timeout: 3
+        Timeout: 30
 
 
 Resources:
@@ -23,22 +23,8 @@ Resources:
                 Variables:
                     PARAM1: VALUE
             Events:
-                HelloWorld:
-                    Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
+                Schedule:
+                    Type: Schedule
                     Properties:
-                        Path: /hello
-                        Method: get
-
-Outputs:
-
-    HelloWorldApi:
-      Description: "API Gateway endpoint URL for Prod stage for Hello World function"
-      Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/hello/"
-
-    HelloWorldFunction:
-      Description: "Hello World Lambda Function ARN"
-      Value: !GetAtt HelloWorldFunction.Arn
-
-    HelloWorldFunctionIamRole:
-      Description: "Implicit IAM Role created for Hello World function"
-      Value: !GetAtt HelloWorldFunctionRole.Arn
+                        # 毎日12時に実行する
+                        Schedule: cron(0 3 * * ? *)
