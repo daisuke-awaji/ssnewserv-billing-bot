@@ -30,6 +30,7 @@ script:
     # Pull Requests was created for develop to master
     - |
       if [ "$TRAVIS_BRANCH" == "master" ] && [ "$TRAVIS_PULL_REQUEST" != "false" ]; then
+        echo "[INFO] Pull request was created.";
       fi
 
     #   ___  _   _ _  __   __  ____  _   _ ____  _   _ _____ ____
