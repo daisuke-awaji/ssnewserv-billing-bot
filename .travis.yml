@@ -16,7 +16,6 @@ script:
     # Master branch was pushed or marged by develop branches
     - |
       if [ "$TRAVIS_BRANCH" == "master" ] && [ "$TRAVIS_PULL_REQUEST" == "false" ]; then
-        figlet Master Branch Deploy;
         echo "[INFO] Master branch was pushed or marged by feature branches";
         echo "[BUILD] Packer build.";
         aws cloudformation package --template-file template.yaml --s3-bucket ssnewserv-aws-billing-slack-bot --output-template-file output.yaml --region us-east-1;
