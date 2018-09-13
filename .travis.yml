@@ -19,8 +19,8 @@ script:
         figlet Master Branch Deploy;
         echo "[INFO] Master branch was pushed or marged by feature branches";
         echo "[BUILD] Packer build.";
-        aws cloudformation package --template-file template.yaml --s3-bucket ssnewserv-aws-billing-slack-bot --output-template-file output.yaml --region us-east-1
-        aws cloudformation deploy --template-file output.yaml --stack-name billing-bot --capabilities CAPABILITY_IAM CAPABILITY_NAMED_IAM --region us-east-1
+        aws cloudformation package --template-file template.yaml --s3-bucket ssnewserv-aws-billing-slack-bot --output-template-file output.yaml --region us-east-1;
+        aws cloudformation deploy --template-file output.yaml --stack-name billing-bot --capabilities CAPABILITY_IAM CAPABILITY_NAMED_IAM --region us-east-1;
       fi
 
     #  ____  _   _ _     _       ____  _____ ___  _   _ _____ ____ _____ ____
