@@ -7,50 +7,47 @@ Description: >
 
 # More info about Globals: https://github.com/awslabs/serverless-application-model/blob/master/docs/globals.rst
 Globals:
-    Function:
-        Timeout: 30
+  Function:
+    Timeout: 30
 
 
 Resources:
 
-    HelloWorldFunction:
-        Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
-        Properties:
-            CodeUri: hello_world/build/
-            Handler: app.lambda_handler
-            Runtime: python3.6
-            Role: !GetAtt GetCostRole.Arn
-            Environment: # More info about Env Vars: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#environment-object
-                Variables:
-                    PARAM1: VALUE
-            Events:
-                Schedule:
-                    Type: Schedule
-                    Properties:
-                        # 毎日12時に実行する
-                        Schedule: cron(0 3 * * ? *)
+  HelloWorldFunction:
+    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+    Properties:
+      CodeUri: hello_world/build/
+      Handler: app.lambda_handler
+      Runtime: python3.6
+      Role: !GetAtt GetCostRole.Arn
+      Events:
+        Schedule:
+          Type: Schedule
+          Properties:
+            # 毎日12時に実行する
+            Schedule: cron(0 3 * * ? *)
 
-    GetCostRole:
-        Type: 'AWS::IAM::Role'
-        Properties:
-            RoleName: !Sub ${Environment}-stack-delete-notice-role
-            AssumeRolePolicyDocument:
-                Version: '2012-10-17'
-                Statement:
-                    - Effect: "Allow"
-                      Principal:
-                            Service:
-                            - "lambda.amazonaws.com"
-                            Action:
-                            - "sts:AssumeRole"
-            Path: "/"
-            Policies:
-            -
-              PolicyName: get-cost-policy
-              PolicyDocument:
-                Version: "2012-10-17"
-                Statement:
-                  -
-                    Effect: "Allow"
-                    Action: "ce:*"
-                    Resource: "*"
+  GetCostRole:
+    Type: 'AWS::IAM::Role'
+    Properties:
+      RoleName: get-cost-role
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: "Allow"
+            Principal:
+              Service:
+                - "lambda.amazonaws.com"
+            Action:
+              - "sts:AssumeRole"
+      Path: "/"
+      Policies:
+        -
+          PolicyName: get-cost-policy
+          PolicyDocument:
+            Version: "2012-10-17"
+            Statement:
+              -
+                Effect: "Allow"
+                Action: "ce:*"
+                Resource: "*"

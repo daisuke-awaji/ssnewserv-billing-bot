@@ -1,6 +1,6 @@
-# ssnewwserv-billing-bot
+# ssnewserv-billing-bot
 
-This is a sample template for ssnewwserv-billing-bot - Below is a brief explanation of what we have generated for you:
+This is a sample template for ssnewserv-billing-bot - Below is a brief explanation of what we have generated for you:
 
 ```bash
 .
@@ -34,7 +34,7 @@ pip install -r requirements.txt -t hello_world/build/
 cp hello_world/*.py hello_world/build/
 ```
 
-1. Step 1 install our dependencies into ``build`` folder 
+1. Step 1 install our dependencies into ``build`` folder
 2. Step 2 copies our application into ``build`` folder
 
 **NOTE:** As you change your application code as well as dependencies during development you'll need to make sure these steps are repeated in order to execute your Lambda and/or API Gateway locally.
@@ -94,7 +94,7 @@ Next, the following command will create a Cloudformation Stack and deploy your S
 ```bash
 sam deploy \
     --template-file packaged.yaml \
-    --stack-name ssnewwserv-billing-bot \
+    --stack-name ssnewserv-billing-bot \
     --capabilities CAPABILITY_IAM
 ```
 
@@ -104,13 +104,13 @@ After deployment is complete you can run the following command to retrieve the A
 
 ```bash
 aws cloudformation describe-stacks \
-    --stack-name ssnewwserv-billing-bot \
+    --stack-name ssnewserv-billing-bot \
     --query 'Stacks[].Outputs'
-``` 
+```
 
 ## Testing
 
-We use **Pytest** for testing our code and you can install it using pip: ``pip install pytest`` 
+We use **Pytest** for testing our code and you can install it using pip: ``pip install pytest``
 
 Next, we run `pytest` against our `tests` folder to run our initial unit tests:
 
@@ -148,12 +148,12 @@ sam package \
 
 sam deploy \
     --template-file packaged.yaml \
-    --stack-name ssnewwserv-billing-bot \
+    --stack-name ssnewserv-billing-bot \
     --capabilities CAPABILITY_IAM \
     --parameter-overrides MyParameterSample=MySampleValue
 
 aws cloudformation describe-stacks \
-    --stack-name ssnewwserv-billing-bot --query 'Stacks[].Outputs'
+    --stack-name ssnewserv-billing-bot --query 'Stacks[].Outputs'
 ```
 
 ## Bringing to the next level

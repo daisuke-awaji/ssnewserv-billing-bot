@@ -1,0 +1,66 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: 'ssnewwserv-billing-bot
+
+  Sample SAM Template for ssnewwserv-billing-bot
+
+  '
+Globals:
+  Function:
+    Timeout: 30
+Resources:
+  GetCostRole:
+    Properties:
+      AssumeRolePolicyDocument:
+        Statement:
+        - Effect: Allow
+          Principal:
+            Action:
+            - sts:AssumeRole
+            Service:
+            - lambda.amazonaws.com
+        Version: '2012-10-17'
+      Path: /
+      Policies:
+      - PolicyDocument:
+          Statement:
+          - Action: ce:*
+            Effect: Allow
+            Resource: '*'
+          Version: '2012-10-17'
+        PolicyName: get-cost-policy
+      RoleName: get-cost-role
+    Type: AWS::IAM::Role
+  HelloWorldFunction:
+    Properties:
+      CodeUri: s3://ssnewserv-aws-billing-slack-bot/0f01696214c8af9ab9e77e69e7b624c5
+      Events:
+        Schedule:
+          Properties:
+            Schedule: cron(0 3 * * ? *)
+          Type: Schedule
+      Handler: app.lambda_handler
+      Runtime: python3.6
+    Type: AWS::Serverless::Function
+  StackDeleteNoticeIAMRole:
+    Properties:
+      AssumeRolePolicyDocument:
+        Statement:
+        - Action:
+          - sts:AssumeRole
+          Effect: Allow
+          Principal:
+            Service:
+            - lambda.amazonaws.com
+        Version: '2012-10-17'
+      Path: /
+      Policies:
+      - PolicyDocument:
+          Statement:
+          - Action: cloudformation:*
+            Effect: Allow
+            Resource: '*'
+          Version: '2012-10-17'
+        PolicyName: stack-delete-notice-policy
+      RoleName: stack-delete-notice-role
+    Type: AWS::IAM::Role
+Transform: AWS::Serverless-2016-10-31
