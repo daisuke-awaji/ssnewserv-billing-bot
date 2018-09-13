@@ -52,5 +52,5 @@ Resources:
                 Statement:
                   -
                     Effect: "Allow"
-                    Action: "GetCostAndUsage:*"
+                    Action: "ce:*"
                     Resource: "*"
