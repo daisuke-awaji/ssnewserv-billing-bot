@@ -4,10 +4,9 @@ python:
   - "3.6"
 cache: pip
 before_install:
-    - pip install -r requirements.txt -t src/build/
+    - pip install -r requirements.txt -t hello_world/build/
     - pip install awscli
-    - cp src/*.py src/build/
+    - cp hello_world/*.py hello_world/build/
 script:
     - aws cloudformation package --template-file template.yaml --s3-bucket sam-template-packaged --output-template-file output.yaml --region us-east-1
     - aws cloudformation deploy --template-file output.yaml --stack-name watson --capabilities CAPABILITY_IAM --region us-east-1
-    
